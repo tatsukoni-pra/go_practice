@@ -1,5 +1,5 @@
 #!/bin/zsh
-HOME_PATH='/Users/tatsukoni_macpro2/Desktop/go_prac'
+HOME_PATH='../'
 BUILD_FILE=$1
 EXEC_FILE=`echo $BUILD_FILE | sed s/.go//`
 
