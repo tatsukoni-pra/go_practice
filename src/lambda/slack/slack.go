@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 type slack struct {
@@ -19,17 +20,16 @@ type params struct {
 	Channel   string `json:"channel"`
 }
 
-func NewSlack(url string, text string, username string, iconEmoji string, channel string) *slack {
-
+func NewSlack(text string, userName string, iconEmoji string) *slack {
 	p := params {
 		Text:      text,
-		Username:  username,
+		Username:  userName,
 		IconEmoji: iconEmoji,
-		Channel:   channel}
+		Channel:   os.Getenv("NOTIFY_CHANNEL")}
 
 	return &slack {
 		params: p,
-		url:    url}
+		url:    os.Getenv("SLACK_HOCK_URL")}
 }
 
 func (s *slack) Send() {

@@ -2,20 +2,16 @@ package main
 
 import (
 	"context"
-	"os"
 
 	slack "lambda/slack"
+	event "lambda/event"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/events"
 )
 
-func HandleRequest(ctx context.Context) (string, error) {
-	slackURL := os.Getenv("SLACK_HOCK_URL")
-	slackText := "hello world!"
-	userName := "notify-test"
-	iconEmoji := ":ghost:"
-	channelName := os.Getenv("NOTIFY_CHANNEL")
-
-	sl := slack.NewSlack(slackURL, slackText, userName, iconEmoji, channelName)
+func HandleRequest(ctx context.Context, snsEvent events.SNSEvent) (string, error) {
+	slackInfoByDeployStatus := event.GetSlackInfoByDeployStatus(event.GetDeployStatus(snsEvent))
+	sl := slack.NewSlack(slackInfoByDeployStatus.Text, slackInfoByDeployStatus.Username, slackInfoByDeployStatus.IconEmoji)
 	sl.Send()
 	return "", nil
 }
