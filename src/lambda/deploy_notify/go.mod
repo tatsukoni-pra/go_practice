@@ -1,4 +1,4 @@
-module lambda
+module deploy_notify
 
 go 1.15
 

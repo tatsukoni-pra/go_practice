@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 
-	slack "lambda/slack"
-	event "lambda/event"
+	slack "deploy_notify/slack"
+	event "deploy_notify/event"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-lambda-go/events"
 )
