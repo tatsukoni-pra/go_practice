@@ -1,4 +1,4 @@
-module lambda
+module thumbnail
 
 go 1.15
 
